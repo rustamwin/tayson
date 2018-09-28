@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="wrap">
+  <app-nav></app-nav>
+
+  <div class="container content">
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <h1>
+          Welcome to {{ title }}!
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="todo-text" class="col-lg-1 control-label">Text</label>
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" [(ngModel)]="todo.text" class="form-control" name="text" id="todo-text"/>
+            </div>
+            <div *ngIf="!todo.id" class="col-md-6">
+              <button [disabled]="!todo.text" class="btn btn-success" (click)="create()">Add</button>
+            </div>
+            <div *ngIf="todo.id" class="col-md-6">
+              <button [disabled]="!todo.text" class="btn btn-success" (click)="update()">Update</button>
+              <button class="btn btn-danger ml-1" (click)="delete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-unstyled">
+          <li *ngFor="let item of list"><a href="javascript:void(0)" (click)="view(item.id)">{{item.text}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"></footer>
+</div>

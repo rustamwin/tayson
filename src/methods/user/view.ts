@@ -4,11 +4,12 @@
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
 import {getCustomRepository} from "typeorm";
-import {TodoRepository} from "../../repository/TodoRepository";
+import {Project} from "../../entity/Project";
+import {ProjectRepository} from "../../repository/ProjectRepository";
 
-module.exports = async (params: any) => {
+module.exports = async (params: Project) => {
     try {
-        return await getCustomRepository(TodoRepository).find(params);
+        return await getCustomRepository(ProjectRepository).find(params);
     } catch (error) {
         return Promise.reject({message: error.message});
     }

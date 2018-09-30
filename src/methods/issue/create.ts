@@ -5,10 +5,14 @@
  */
 import {getCustomRepository} from "typeorm";
 import {ProjectRepository} from "../../repository/ProjectRepository";
+import {Issue} from "../../entity/Issue";
 
-module.exports = async (params: any) => {
+module.exports = async (params: Issue) => {
     try {
-        return await getCustomRepository(ProjectRepository).find(params);
+        const issue = new Issue();
+        issue.text = params.text;
+        issue.project = params.project;
+        return await getCustomRepository(ProjectRepository).save([issue]);
     } catch (error) {
         return Promise.reject({message: error.message});
     }

@@ -1,9 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, JoinTable} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Issue} from "./Issue";
-import {IsEmail} from "class-validator";
 
 @Entity()
-export class User {
+export class Assigner {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -14,12 +13,9 @@ export class User {
     lastName: string;
 
     @Column()
-    @IsEmail()
     email: string;
 
-    @Column('varchar', {
-        length: 200
-    })
+    @Column()
     job: string;
 
     @CreateDateColumn()
@@ -28,10 +24,4 @@ export class User {
     @ManyToMany(type => Issue, issue => issue.assigners)
     @JoinTable()
     issues: Issue[];
-
-    @Column()
-    password: string;
-
-    @Column()
-    token: string;
 }

@@ -4,7 +4,7 @@
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
 import {getCustomRepository} from "typeorm";
-import {TodoRepository} from "../../../repository/TodoRepository";
+import {ProjectRepository} from "../../../repository/ProjectRepository";
 
 module.exports = async (params: any) => {
     try {

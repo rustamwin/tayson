@@ -4,12 +4,12 @@
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
 import {getCustomRepository} from "typeorm";
-import {TodoRepository} from "../../repository/TodoRepository";
-import {Todo} from "../../entity/Todo";
+import {ProjectRepository} from "../../repository/ProjectRepository";
+import {Issue} from "../../entity/Issue";
 
-module.exports = async (params: Todo) => {
+module.exports = async (params: Issue) => {
     try {
-        return await getCustomRepository(TodoRepository).update({id: params.id}, new Todo(params.text, params.done, new Date()));
+        return await getCustomRepository(ProjectRepository).delete({id: params.id});
     } catch (error) {
         console.log(error);
         return Promise.reject({message: error.message});

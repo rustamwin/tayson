@@ -4,13 +4,7 @@ import {RpcResponse, RpcService} from "./common/rpc.service";
 @Component({
     selector: 'app-root',
     template: `
-        <div class="wrap">
-            <app-nav></app-nav>
-            <div class="container content">
-                <router-outlet></router-outlet>
-            </div>
-            <footer class="footer"></footer>
-        </div>`,
+        <router-outlet></router-outlet>`,
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {

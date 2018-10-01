@@ -35,3 +35,7 @@ export interface RpcResponse {
     error: Object;
     result: Array<object>;
 }
+
+export interface RpcResult {
+    [name as any]
+}

@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {AppComponent} from "./app.component";
+import {NavComponent} from "./layouts/nav/nav.component";
 
 const routes: Routes = [
     {
         path: '',
+        component: NavComponent,
         children: [
             {
                 path: '',
@@ -12,19 +13,31 @@ const routes: Routes = [
             },
             {
                 path: 'home',
-                loadChildren: './home/home.module#HomeModule'
+                loadChildren: './home/home.module#HomeModule',
+                data: {
+                    activeClass: 'active'
+                }
             },
             {
-                path: 'users',
-                loadChildren: './user/user.module#UserModule'
+                path: 'user',
+                loadChildren: './user/user.module#UserModule',
+                data: {
+                    activeClass: 'active'
+                }
             },
             {
-                path: 'projects',
-                loadChildren: './project/project.module#ProjectModule'
+                path: 'project',
+                loadChildren: './project/project.module#ProjectModule',
+                data: {
+                    activeClass: 'active'
+                }
             },
             {
-                path: 'issues',
-                loadChildren: './issue/issue.module#IssueModule'
+                path: 'issue',
+                loadChildren: './issue/issue.module#IssueModule',
+                data: {
+                    activeClass: 'active'
+                }
             }
         ]
     }

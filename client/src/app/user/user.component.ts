@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RpcResponse, RpcResult, RpcService} from "../common/rpc.service";
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+    selector: 'app-user',
+    template: `
+        <router-outlet></router-outlet>`,
+    styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+    constructor(private rpcService: RpcService) {
+    }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

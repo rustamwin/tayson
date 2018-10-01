@@ -12,6 +12,11 @@ export class Project {
     name: string;
 
     @Column('varchar', {
+        length: 100
+    })
+    slug: string;
+
+    @Column('varchar', {
         length: 300
     })
     info: string;

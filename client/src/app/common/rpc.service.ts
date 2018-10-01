@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {Issue} from "./models/issue";
+import {Project} from "../../../../src/entity/Project";
+import {User} from "./models/user";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +13,7 @@ export class RpcService {
     constructor(private http: HttpClient) {
     }
 
-    public call(method: string, params: Object) {
+    public call(method: string, params: Object): Observable<object> {
         const headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
         return this.http.post('http://localhost:3001',
             {method, params, id: this.getRequestId(), jsonrpc: "2.0"},
@@ -33,9 +37,8 @@ export interface RpcResponse {
     jsonrpc: String;
     method: String;
     error: Object;
-    result: Array<object>;
+    result: Array<Issue>;
+    result: Array<Project>;
+    result: Array<User>;
 }
 
-export interface RpcResult {
-    [name as any]
-}

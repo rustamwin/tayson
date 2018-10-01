@@ -1,21 +1,21 @@
 <h3>{{title}}</h3>
 <p>
-    <a class="btn btn-info" [routerLink]="['/issue/create']">Create</a>
+    <a class="btn btn-info" [routerLink]="['/project/create']">Create</a>
 </p>
 <div class="table-responsive">
     <table class="table table-condensed table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>Text</th>
-            <th>Done</th>
+            <th>Name</th>
+            <th>Status</th>
             <th>Created At</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let issue of issueList">
-            <th>{{issue.text}}</th>
-            <td>{{issue.done}}</td>
-            <td>{{issue.createdAt | date}}</td>
+        <tr *ngFor="let project of projectList">
+            <th>{{project.name}}</th>
+            <td>{{project.status}}</td>
+            <td>{{project.createdAt | date}}</td>
         </tr>
         </tbody>
     </table>

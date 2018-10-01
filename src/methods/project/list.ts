@@ -7,7 +7,7 @@ import {Project} from "../../entity/Project";
 import {getCustomRepository} from "typeorm";
 import {ProjectRepository} from "../../repository/ProjectRepository";
 
-exports = async (params: Project) => {
+module.exports = async (params: Project) => {
     try {
         return await getCustomRepository(ProjectRepository).find({});
     } catch (e) {

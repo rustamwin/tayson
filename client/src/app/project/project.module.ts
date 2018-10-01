@@ -3,15 +3,17 @@ import {CommonModule} from '@angular/common';
 
 import {ProjectRoutingModule} from './project-routing.module';
 import {ProjectComponent} from './project.component';
-import { IndexComponent } from './index/index.component';
-import { CreateComponent } from './create/create.component';
-import { ViewComponent } from './view/view.component';
-import { UpdateComponent } from './update/update.component';
+import {IndexComponent} from './index/index.component';
+import {CreateComponent} from './create/create.component';
+import {ViewComponent} from './view/view.component';
+import {UpdateComponent} from './update/update.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         CommonModule,
-        ProjectRoutingModule
+        ProjectRoutingModule,
+        FormsModule
     ],
     declarations: [ProjectComponent, IndexComponent, CreateComponent, ViewComponent, UpdateComponent]
 })

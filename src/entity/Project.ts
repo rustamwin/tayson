@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Issue} from "./Issue";
 
 @Entity()
@@ -37,4 +37,9 @@ export class Project {
         nullable: true
     })
     archivedAt: Date;
+
+    @BeforeInsert()
+    beforeInsert() {
+        this.slug = this.name.toLowerCase().replace('/\s+/', '-');
+    }
 }

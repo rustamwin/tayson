@@ -9,7 +9,8 @@ import {Project} from "../../entity/Project";
 
 module.exports = async (params: Project) => {
     try {
-        return await getCustomRepository(ProjectRepository).delete({id: params.id});
+        await getCustomRepository(ProjectRepository).delete({id: params.id});
+        return {success: true};
     } catch (error) {
         console.log(error);
         return Promise.reject({message: error.message});

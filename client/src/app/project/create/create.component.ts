@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
 
     create() {
         this.rpcService.call('project.create', this.project).subscribe((response: RpcResponse) => {
-            this.router.navigate(['/', 'view', response.result.id]);
+            this.router.navigateByUrl(`../view/${response.result.id}`);
         });
     }
 }

@@ -12,7 +12,8 @@ module.exports = async (params: Project) => {
         const project = new Project();
         project.name = params.name;
         project.info = params.info;
-        return await getCustomRepository(ProjectRepository).update({id: params.id}, project);
+        await getCustomRepository(ProjectRepository).update({id: params.id}, project);
+        return {success: true};
     } catch (error) {
         console.log(error);
         return Promise.reject({message: error.message});

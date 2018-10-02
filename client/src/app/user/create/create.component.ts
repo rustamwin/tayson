@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
     }
 
     create() {
-        this.rpcService.call('user.create', this.user).subscribe((res: RpcResponse | User) => {
+        this.rpcService.call('user.create', this.user).subscribe((res: RpcResponse) => {
             this.router.navigate(['/', 'user', res.result.id]);
         });
     }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RpcResponse, RpcResult, RpcService} from "../../common/rpc.service";
+import {RpcResponse, RpcService} from "../../common/rpc.service";
 import {User} from "../../common/models/user";
 
 @Component({
@@ -9,7 +9,7 @@ import {User} from "../../common/models/user";
 })
 export class IndexComponent implements OnInit {
     title: string = 'Users';
-    public userList: RpcResult | User[];
+    public userList: User[];
 
     constructor(private rpcService: RpcService) {
     }

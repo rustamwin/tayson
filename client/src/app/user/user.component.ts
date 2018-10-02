@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RpcResponse, RpcResult, RpcService} from "../common/rpc.service";
+import {RpcResponse, RpcService} from "../common/rpc.service";
 
 @Component({
     selector: 'app-user',

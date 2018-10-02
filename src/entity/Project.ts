@@ -40,6 +40,11 @@ export class Project {
 
     @BeforeInsert()
     beforeInsert() {
-        this.slug = this.name.toLowerCase().replace('/\s+/', '-');
+        this.slug = this.name.toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/&/g, '-and-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-');
     }
 }

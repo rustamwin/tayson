@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let project of projectList">
-            <th>{{project.name}}</th>
+            <th><a [routerLink]="['/project/view', project.id]">{{project.name}}</a></th>
             <td>{{project.status}}</td>
             <td>{{project.createdAt | date}}</td>
         </tr>

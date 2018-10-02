@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Project} from "../../common/models/project";
+import {RpcResponse, RpcService} from "../../common/rpc.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+    selector: 'app-view',
+    templateUrl: './view.component.html',
+    styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+    project: Project = {};
 
-  constructor() { }
+    constructor(private rpcService: RpcService, private route: ActivatedRoute, private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.rpcService.call('project.view', {id: this.route.snapshot.params.id}).subscribe((response: RpcResponse) => {
+            this.project = response.result;
+        });
+    }
+
+    delete() {
+        this.rpcService.call('project.delete', this.project).subscribe((res) => {
+            this.router.navigateByUrl('project/index')
+        })
+    }
 
 }

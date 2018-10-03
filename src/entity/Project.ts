@@ -1,5 +1,6 @@
 import {BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Issue} from "./Issue";
+import * as _ from "lodash";
 
 @Entity()
 export class Project {
@@ -27,9 +28,7 @@ export class Project {
     })
     status: string;
 
-    @OneToMany(type => Issue, issue => issue.project, {
-        nullable: true
-    })
+    @OneToMany(type => Issue, issue => issue.project)
     @JoinTable()
     issues: Issue[];
 
@@ -43,11 +42,6 @@ export class Project {
 
     @BeforeInsert()
     beforeInsert() {
-        this.slug = this.name.toLowerCase()
-            .trim()
-            .replace(/\s+/g, '-')
-            .replace(/&/g, '-and-')
-            .replace(/[^\w\-]+/g, '')
-            .replace(/\-\-+/g, '-');
+        this.slug = _.kebabCase(this.name);
     }
 }

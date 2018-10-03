@@ -9,7 +9,7 @@ import {ProjectRepository} from "../../repository/ProjectRepository";
 
 module.exports = async (params: Project) => {
     try {
-        return await getCustomRepository(ProjectRepository).findOne(params);
+        return await getCustomRepository(ProjectRepository).findOne(params, {relations: ["issues"]});
     } catch (error) {
         return Promise.reject({message: error.message});
     }

@@ -3,13 +3,13 @@
  * @link http://activemedia.uz
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
-import {Project} from "../../entity/Project";
 import {getCustomRepository} from "typeorm";
-import {ProjectRepository} from "../../repository/ProjectRepository";
+import {User} from "../../entity/User";
+import {UserRepository} from "../../repository/UserRepository";
 
-exports = async (params: Project) => {
+module.exports = async (params: User) => {
     try {
-        return await getCustomRepository(ProjectRepository).find(params);
+        return await getCustomRepository(UserRepository).find(params);
     } catch (e) {
         return Promise.reject({message: e.message});
     }

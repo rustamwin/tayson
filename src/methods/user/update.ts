@@ -4,15 +4,12 @@
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
 import {getCustomRepository} from "typeorm";
-import {ProjectRepository} from "../../repository/ProjectRepository";
-import {Project} from "../../entity/Project";
+import {UserRepository} from "../../repository/UserRepository";
+import {User} from "../../entity/User";
 
-module.exports = async (params: Project) => {
+module.exports = async (user: User) => {
     try {
-        const project = new Project();
-        project.name = params.name;
-        project.info = params.info;
-        await getCustomRepository(ProjectRepository).update({id: params.id}, project);
+        await getCustomRepository(UserRepository).update({id: user.id}, user);
         return {success: true};
     } catch (error) {
         console.log(error);

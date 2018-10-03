@@ -7,7 +7,7 @@ import {User} from "../../entity/User";
 import {getCustomRepository} from "typeorm";
 import {UserRepository} from "../../repository/UserRepository";
 
-exports = async (params: User) => {
+module.exports = async (params: User) => {
     try {
         const user = new User();
         user.firstName = params.firstName;

@@ -16,7 +16,7 @@ export class RpcService {
 
     public call(method: string, params: Object): Observable<object> {
         const headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-        return this.http.post<RpcResponse>('http://localhost:3001',
+        return this.http.post<RpcResponse>('http://localhost:3000',
             {method, params, id: uuid(), jsonrpc: "2.0"},
             {headers});
     }

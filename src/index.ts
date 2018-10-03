@@ -28,5 +28,5 @@ createConnection().then(async connection => {
     app.use(server.middleware());
 
     // Run application
-    app.listen(3001, () => console.log(`Server is run on port 3001`));
+    app.listen(3000, () => console.log(`Server is run on port 3000`));
 }).catch(error => console.error(error));

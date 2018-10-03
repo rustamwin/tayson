@@ -4,12 +4,12 @@
  * @author Rustam Mamadaminov <rmamdaminov@gmail.com>.
  */
 import {getCustomRepository} from "typeorm";
-import {ProjectRepository} from "../../repository/ProjectRepository";
-import {Project} from "../../entity/Project";
+import {User} from "../../entity/User";
+import {UserRepository} from "../../repository/UserRepository";
 
-module.exports = async (params: Project) => {
+module.exports = async (params: User) => {
     try {
-        await getCustomRepository(ProjectRepository).delete({id: params.id});
+        await getCustomRepository(UserRepository).delete({id: params.id});
         return {success: true};
     } catch (error) {
         console.log(error);

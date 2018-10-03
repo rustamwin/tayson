@@ -14,6 +14,7 @@ module.exports = async (params: Project) => {
         project.info = params.info;
         return getCustomRepository(ProjectRepository).save(project);
     } catch (e) {
+        console.log(e);
         return Promise.reject({message: e.message});
     }
 };

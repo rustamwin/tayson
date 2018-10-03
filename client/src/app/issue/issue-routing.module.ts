@@ -24,6 +24,10 @@ const routes: Routes = [
                 component: CreateComponent
             },
             {
+                path: ':slug/create',
+                component: CreateComponent
+            },
+            {
                 path: 'view/:id',
                 component: ViewComponent
             },

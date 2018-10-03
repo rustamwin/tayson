@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RpcResponse, RpcService} from "../../common/rpc.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Issue} from "../../common/models/issue";
 import {Project} from "../../common/models/project";
 import {User} from "../../common/models/user";
@@ -16,10 +16,13 @@ export class CreateComponent implements OnInit {
     public users: User[] = [];
     public assigner: User = {};
 
-    constructor(private rpcService: RpcService, private router: Router) {
+    constructor(private rpcService: RpcService, private router: Router, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this.rpcService.call('project.view', {}).subscribe((response: RpcResponse) => {
+            this.issue.project = response.result;
+        });
         this.rpcService.call('project.list', {}).subscribe((response: RpcResponse) => {
             this.projects = response.result;
         });

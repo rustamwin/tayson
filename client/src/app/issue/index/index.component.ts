@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.rpcService.call('issue.list', {}).subscribe((response: RpcResponse) => {
+        this.rpcService.call('issue.list', {relations: ["project"]}).subscribe((response: RpcResponse) => {
             this.issueList = response.result;
         });
     }

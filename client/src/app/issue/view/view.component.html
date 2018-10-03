@@ -17,6 +17,10 @@
                 <th>Done</th>
                 <td>{{issue.done}}</td>
             </tr>
+            <tr *ngIf="issue.project">
+                <th>Project</th>
+                <td>{{issue.project.name}}</td>
+            </tr>
             <tr *ngIf="issue.doneAt">
                 <th>Done At</th>
                 <td>{{issue.doneAt | date:'medium'}}</td>

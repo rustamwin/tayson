@@ -9,13 +9,6 @@
             <input type="checkbox" id="issue-done" class="form-control" [(ngModel)]="issue.done">
             Done
         </label>
-        <div class="form-group">
-            <label class="control-label" for="issue-project">Project</label>
-            <select id="issue-project" class="form-control" [(ngModel)]="issue.project">
-                <option *ngFor="let p of projects" [ngValue]="p" [selected]="issue.project && issue.project.id == p.id">{{p.name}}
-                </option>
-            </select>
-        </div>
         <ul *ngIf="issue.assigners" class="list-unstyled">
             <li *ngFor="let assigner of issue.assigners">{{assigner.firstName + ' ' + assigner.lastName}}</li>
         </ul>

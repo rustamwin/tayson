@@ -3,6 +3,7 @@
         <h4>Project Information</h4>
         <p>
             <a class="btn btn-info " [routerLink]="['/project/update', project.id]">Update</a>
+            <a class="btn btn-warning ml-1" [routerLink]="['/issue', project.slug, 'create']">New Issue</a>
             <a class="btn btn-danger ml-1" href="javascript:;" (click)="delete()">Delete</a>
         </p>
         <table class="table table-striped table-bordered detail-view">

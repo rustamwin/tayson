@@ -4,7 +4,7 @@ import {RpcResponse, RpcService} from "../../common/rpc.service";
 import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-create',
+    selector: 'app-project-create',
     templateUrl: './create.component.html',
     styleUrls: ['./create.component.css']
 })
@@ -18,8 +18,8 @@ export class CreateComponent implements OnInit {
     }
 
     create() {
-        this.rpcService.call('project.create', this.project).subscribe((response: RpcResponse) => {
-            this.router.navigateByUrl(`../view/${response.result.id}`);
+        this.rpcService.call('issue.create', this.project).subscribe((response: RpcResponse) => {
+            this.router.navigateByUrl(`/issue/view/${response.result.id}`);
         });
     }
 }

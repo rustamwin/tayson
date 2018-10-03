@@ -4,7 +4,7 @@ import {RpcResponse, RpcService} from "../../common/rpc.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-    selector: 'app-view',
+    selector: 'app-project-view',
     templateUrl: './view.component.html',
     styleUrls: ['./view.component.css']
 })

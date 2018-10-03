@@ -3,7 +3,7 @@ import {RpcResponse, RpcService} from "../../common/rpc.service";
 import {Issue} from "../../common/models/issue";
 
 @Component({
-    selector: 'app-index',
+    selector: 'app-issue-index',
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.css']
 })

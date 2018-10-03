@@ -3,7 +3,7 @@ import {Project} from "../../common/models/project";
 import {RpcResponse, RpcService} from "../../common/rpc.service";
 
 @Component({
-    selector: 'app-index',
+    selector: 'app-project-index',
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.css']
 })

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Issue} from "./models/issue";
 import {User} from "./models/user";
 import {Project} from "./models/project";
+import {v4 as uuid} from "uuid";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class RpcService {
     public call(method: string, params: Object): Observable<object> {
         const headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
         return this.http.post<RpcResponse>('http://localhost:3001',
-            {method, params, id: this.getRequestId(), jsonrpc: "2.0"},
+            {method, params, id: uuid(), jsonrpc: "2.0"},
             {headers});
     }
 

@@ -1,5 +1,8 @@
 export interface Issue {
-    text: string;
-    lastName: string;
-    email: string;
+    id?: string;
+    text?: string;
+    project?: string;
+    done?: boolean;
+    doneAt?: Date;
+    createAt?: Date;
 }

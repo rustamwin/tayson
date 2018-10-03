@@ -1,4 +1,4 @@
-import {BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Issue} from "./Issue";
 
 @Entity()
@@ -27,7 +27,10 @@ export class Project {
     })
     status: string;
 
-    @OneToMany(type => Issue, issue => issue.project)
+    @OneToMany(type => Issue, issue => issue.project, {
+        nullable: true
+    })
+    @JoinTable()
     issues: Issue[];
 
     @CreateDateColumn()

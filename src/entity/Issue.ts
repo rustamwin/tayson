@@ -36,10 +36,13 @@ export class Issue {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => Assigner, assigner => assigner.issues)
+    @ManyToMany(type => Assigner, assigner => assigner.issues, {
+        nullable: true
+    })
     @JoinTable()
     assigners: Assigner[];
 
     @ManyToOne(type => Project, project => project.issues)
+    @JoinTable()
     project: Project;
 }

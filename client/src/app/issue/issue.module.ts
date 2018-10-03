@@ -7,11 +7,13 @@ import { CreateComponent } from './create/create.component';
 import { IndexComponent } from './index/index.component';
 import { UpdateComponent } from './update/update.component';
 import { ViewComponent } from './view/view.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
-    IssueRoutingModule
+    IssueRoutingModule,
+      FormsModule
   ],
   declarations: [IssueComponent, CreateComponent, IndexComponent, UpdateComponent, ViewComponent]
 })

@@ -41,6 +41,9 @@ export class UpdateComponent implements OnInit {
 
     assign() {
         this.issue.assigners.push(this.assigner);
+        this.users = this.users.filter((item) => {
+            return item.id != this.assigner.id;
+        });
         this.assigner = {};
     }
 

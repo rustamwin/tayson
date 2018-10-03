@@ -10,7 +10,8 @@ import {Issue} from "../../entity/Issue";
 module.exports = async (issue: Issue) => {
     try {
         delete issue.updatedAt;
-        return await getCustomRepository(IssueRepository).update({id: issue.id}, issue);
+        await getCustomRepository(IssueRepository).update({id: issue.id}, issue);
+        return {success: true};
     } catch (error) {
         console.log(error);
         return Promise.reject({message: error.message});

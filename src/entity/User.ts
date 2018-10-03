@@ -27,7 +27,6 @@ export class User {
     createdAt: Date;
 
     @ManyToMany(type => Issue, issue => issue.assigners)
-    @JoinTable()
     issues: Issue[];
 
     @Column()
@@ -36,7 +35,7 @@ export class User {
     @BeforeInsert()
     async beforeInsert() {
         //if (this.password) {
-            this.password = await bcrypt.hash(this.password, 1);
+        this.password = await bcrypt.hash(this.password, 1);
         //}
     }
 }

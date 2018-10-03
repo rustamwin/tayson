@@ -20,9 +20,7 @@ export class Issue {
     })
     text: string;
 
-    @Column('boolean', {
-        default: false
-    })
+    @Column('boolean')
     done: boolean;
 
     @Column({
@@ -42,7 +40,9 @@ export class Issue {
     @JoinTable()
     assigners: Assigner[];
 
-    @ManyToOne(type => Project, project => project.issues)
+    @ManyToOne(type => Project, project => project.issues, {
+        cascade: true
+    })
     @JoinTable()
     project: Project;
 }

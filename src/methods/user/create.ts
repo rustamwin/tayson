@@ -6,14 +6,13 @@
 import {User} from "../../entity/User";
 import {getCustomRepository} from "typeorm";
 import {UserRepository} from "../../repository/UserRepository";
+import {error} from "util";
 
-module.exports = async (params: User) => {
+module.exports = async (user: User) => {
     try {
-        const user = new User();
-        user.firstName = params.firstName;
-        user.lastName = params.lastName;
         return getCustomRepository(UserRepository).save(user);
     } catch (e) {
+        console.log(e);
         return Promise.reject({message: e.message});
     }
 };

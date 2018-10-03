@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let user of userList">
-            <th>{{user.firstName}}</th>
+            <th><a [routerLink]="['/user/view', user.id]">{{user.firstName}}</a></th>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
         </tr>

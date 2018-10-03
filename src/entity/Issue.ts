@@ -7,7 +7,7 @@ import {
     JoinTable,
     UpdateDateColumn, ManyToOne
 } from "typeorm";
-import {Assigner} from "./Assigner";
+import {User} from "./User";
 import {Project} from "./Project";
 
 @Entity()
@@ -34,11 +34,11 @@ export class Issue {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => Assigner, assigner => assigner.issues, {
-        nullable: true
+    @ManyToMany(type => User, assigner => assigner.issues, {
+        cascade: true
     })
     @JoinTable()
-    assigners: Assigner[];
+    assigners: User[];
 
     @ManyToOne(type => Project, project => project.issues, {
         cascade: true

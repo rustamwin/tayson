@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-    public user: User;
+    public user: User = {};
 
     constructor(private rpcService: RpcService, private router: Router) {
     }
@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
 
     create() {
         this.rpcService.call('user.create', this.user).subscribe((res: RpcResponse) => {
-            this.router.navigate(['/', 'user', res.result.id]);
+            this.router.navigateByUrl(`/user/view/${res.result.id}`);
         });
     }
 

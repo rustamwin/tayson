@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, JoinTable} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, JoinTable, BeforeInsert} from "typeorm";
 import {Issue} from "./Issue";
 import {IsEmail} from "class-validator";
+import * as bcrypt from "bcrypt";
 
 @Entity()
 export class User {
@@ -32,6 +33,10 @@ export class User {
     @Column()
     password: string;
 
-    @Column()
-    token: string;
+    @BeforeInsert()
+    async beforeInsert() {
+        //if (this.password) {
+            this.password = await bcrypt.hash(this.password, 1);
+        //}
+    }
 }

@@ -10,22 +10,26 @@ import {Issue} from "../../common/models/issue";
     styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
-    public issue: Issue;
+    public issue: Issue = {};
+    public projects: Project[] = [];
     public title: string;
 
     constructor(private rpcService: RpcService, private router: Router, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.rpcService.call('project.view', {id: this.route.snapshot.params.id}).subscribe((response: RpcResponse) => {
+        this.rpcService.call('issue.view', {id: this.route.snapshot.params.id}).subscribe((response: RpcResponse) => {
             this.issue = response.result;
-            this.title = response.result.name;
+            this.title = response.result.text;
+        });
+        this.rpcService.call('project.list', {}).subscribe((response: RpcResponse) => {
+            this.projects = response.result;
         });
     }
 
     update() {
-        this.rpcService.call('project.update', this.issue).subscribe((response: RpcResponse) => {
-            this.router.navigateByUrl(`project/view/${this.issue.id}`);
+        this.rpcService.call('issue.update', this.issue).subscribe((response: RpcResponse) => {
+            this.router.navigateByUrl(`/issue/view/${this.issue.id}`);
         });
     }
 

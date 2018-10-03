@@ -1,3 +1,31 @@
-<p>
-  view works!
-</p>
+<div class="row">
+    <div class="col col-md-12">
+        <h4>Project Information</h4>
+        <p>
+            <a class="btn btn-info " [routerLink]="['/issue/update', issue.id]">Update</a>
+            <a class="btn btn-danger ml-1" href="javascript:;" (click)="delete()">Delete</a>
+        </p>
+        <table class="table table-striped table-bordered detail-view">
+            <tbody>
+            <tr>
+                <th>Text</th>
+                <td>
+                    {{issue.text}}
+                </td>
+            </tr>
+            <tr>
+                <th>Done</th>
+                <td>{{issue.done}}</td>
+            </tr>
+            <tr *ngIf="issue.doneAt">
+                <th>Done At</th>
+                <td>{{issue.doneAt | date:'medium'}}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{issue.createdAt | date:'medium'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

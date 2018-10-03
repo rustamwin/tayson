@@ -1,3 +1,21 @@
-<p>
-  update works!
-</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="control-label" for="issue-text">Text</label>
+            <input type="text" id="issue-text" class="form-control" [(ngModel)]="issue.text">
+        </div>
+        <label class="control-label" for="issue-done">
+            <input type="checkbox" id="issue-done" class="form-control" [(ngModel)]="issue.done">
+            Done
+        </label>
+        <div class="form-group">
+            <label class="control-label" for="issue-project">Project</label>
+            <select id="issue-project" [(ngModel)]="issue.project">
+                <option *ngFor="let p of projects" [ngValue]="p">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button (click)="update()" class="btn btn-success">Update</button>
+        </div>
+    </div>
+</div>

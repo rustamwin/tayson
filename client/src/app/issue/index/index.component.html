@@ -13,9 +13,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let issue of issueList">
-            <th>{{issue.text}}</th>
+            <th><a [routerLink]="['/issue/view', issue.id]">{{issue.text}}</a></th>
             <td>{{issue.done}}</td>
-            <td>{{issue.createdAt | date}}</td>
+            <td>{{issue.createdAt | date:'medium'}}</td>
         </tr>
         </tbody>
     </table>

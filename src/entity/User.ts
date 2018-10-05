@@ -5,11 +5,8 @@ import {
     CreateDateColumn,
     ManyToMany,
     JoinTable,
-    BeforeInsert,
-    AfterInsert, AfterLoad, BeforeUpdate
 } from "typeorm";
 import {Issue} from "./Issue";
-import {IsEmail} from "class-validator";
 import * as bcrypt from "bcrypt";
 
 @Entity()
@@ -24,7 +21,6 @@ export class User {
     lastName: string;
 
     @Column()
-    @IsEmail()
     email: string;
 
     @Column('varchar', {

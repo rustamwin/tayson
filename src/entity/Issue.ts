@@ -34,10 +34,11 @@ export class Issue {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => User, assigner => assigner.issues)
+    @ManyToMany(type => User, user => user.issues, {
+        cascade: ["update"]
+    })
     assigners: User[];
 
     @ManyToOne(type => Project, project => project.issues)
-    @JoinTable()
     project: Project;
 }

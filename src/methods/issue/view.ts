@@ -9,9 +9,16 @@ import {IssueRepository} from "../../repository/IssueRepository";
 module.exports = async (params: any) => {
     try {
         return await getCustomRepository(IssueRepository).findOne(params, {
-            relations: ["project", "assigners"],
+            relations: ["assigners"],
+            /*join: {
+                alias: 'issue',
+                leftJoinAndSelect: {
+                    assigners: 'user'
+                }
+            }*/
         });
     } catch (error) {
+        console.log(error);
         return Promise.reject({message: error.message});
     }
 };

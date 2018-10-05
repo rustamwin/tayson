@@ -47,6 +47,7 @@
     "class-validator": "^0.9.1",
     "commander": "^2.18.0",
     "cors": "^2.8.4",
+    "crypto": "^1.0.1",
     "express": "^4.16.3",
     "jayson": "^2.0.6",
     "lodash": "^4.17.11",

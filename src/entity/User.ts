@@ -6,7 +6,7 @@ import {
     ManyToMany,
     JoinTable,
     BeforeInsert,
-    AfterInsert
+    AfterInsert, AfterLoad, BeforeUpdate
 } from "typeorm";
 import {Issue} from "./Issue";
 import {IsEmail} from "class-validator";
@@ -47,12 +47,5 @@ export class User {
         nullable: true
     })
     pass: string;
-
-    @BeforeInsert()
-    beforeInsert() {
-        if (this.password) {
-            this.pass = bcrypt.hashSync(this.password, 10);
-        }
-    }
 
 }

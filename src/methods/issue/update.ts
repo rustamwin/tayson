@@ -11,8 +11,7 @@ import {ProjectRepository} from "../../repository/ProjectRepository";
 module.exports = async (issue: Issue) => {
     try {
         delete issue.updatedAt;
-        issue.project = await getCustomRepository(ProjectRepository).findOne(issue.id);
-        await getCustomRepository(IssueRepository).update({id: issue.id}, issue);
+        await getCustomRepository(IssueRepository).save(issue);
         return {success: true};
     } catch (error) {
         console.log(error);

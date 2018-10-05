@@ -33,4 +33,16 @@
             </tbody>
         </table>
     </div>
+    <div *ngIf="project.issues" class="col col-md-12">
+        <h4>Project Issues</h4>
+        <table class="table table-striped table-bordered detail-view">
+            <tbody>
+            <tr *ngFor="let issue of project.issues">
+                <td>
+                    <a [routerLink]="['/issue/view', issue.id]">{{issue.text}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -6,7 +6,6 @@
 import {User} from "../../entity/User";
 import {getCustomRepository} from "typeorm";
 import {UserRepository} from "../../repository/UserRepository";
-import {error} from "util";
 
 module.exports = async (user: User) => {
     try {

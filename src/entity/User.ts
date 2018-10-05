@@ -1,4 +1,13 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, JoinTable, BeforeInsert} from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    ManyToMany,
+    JoinTable,
+    BeforeInsert,
+    AfterInsert
+} from "typeorm";
 import {Issue} from "./Issue";
 import {IsEmail} from "class-validator";
 import * as bcrypt from "bcrypt";
@@ -27,15 +36,23 @@ export class User {
     createdAt: Date;
 
     @ManyToMany(type => Issue, issue => issue.assigners)
+    @JoinTable()
     issues: Issue[];
 
     @Column()
     password: string;
 
+    @Column('varchar', {
+        length: 200,
+        nullable: true
+    })
+    pass: string;
+
     @BeforeInsert()
-    async beforeInsert() {
-        //if (this.password) {
-        this.password = await bcrypt.hash(this.password, 1);
-        //}
+    beforeInsert() {
+        if (this.password) {
+            this.pass = bcrypt.hashSync(this.password, 10);
+        }
     }
+
 }

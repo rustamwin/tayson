@@ -35,7 +35,6 @@ export class Issue {
     updatedAt: Date;
 
     @ManyToMany(type => User, assigner => assigner.issues)
-    @JoinTable()
     assigners: User[];
 
     @ManyToOne(type => Project, project => project.issues)

@@ -36,7 +36,7 @@
     "@types/passport": "^0.4.6",
     "@types/passport-local": "^1.0.33",
     "@types/socket.io": "^1.4.38",
-    "ts-node": "^7.0.1",
+    "ts-node": "^3.3.0",
     "typescript": "^3.0.3",
     "typescript-formatter": "^7.2.2"
   },
@@ -48,7 +48,7 @@
     "commander": "^2.18.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "jayson": "github:tedeh/jayson#typescript",
+    "jayson": "^2.0.6",
     "lodash": "^4.17.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

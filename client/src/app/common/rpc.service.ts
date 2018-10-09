@@ -15,14 +15,17 @@ export class RpcService {
     }
 
     public call(method: string, params: Object): Observable<object> {
-        const headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-        return this.http.post<RpcResponse>('http://localhost:3000',
+        return this.http.post<RpcRequest>(
+            'http://localhost:3000',
             {method, params, id: uuid(), jsonrpc: "2.0"},
-            {headers});
+            {headers: RpcService.requestHeaders()}
+        );
     }
 
-    protected getRequestId() {
-        return new Date().getMilliseconds();
+    private static requestHeaders() {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json; charset=UTF-8');
+        return headers;
     }
 }
 

@@ -20,7 +20,9 @@ export class Issue {
     })
     text: string;
 
-    @Column('boolean')
+    @Column('boolean', {
+        default: false
+    })
     done: boolean;
 
     @Column({
@@ -34,9 +36,7 @@ export class Issue {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => User, user => user.issues, {
-        cascade: ["update"]
-    })
+    @ManyToMany(type => User, user => user.issues)
     assigners: User[];
 
     @ManyToOne(type => Project, project => project.issues)

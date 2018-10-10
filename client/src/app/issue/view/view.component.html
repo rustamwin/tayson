@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Done</th>
-                <td>{{issue.done}}</td>
+                <td>{{issue.done ? 'Yes' : 'No'}}</td>
             </tr>
             <tr *ngIf="issue.project">
                 <th>Project</th>

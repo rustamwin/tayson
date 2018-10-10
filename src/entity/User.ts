@@ -4,7 +4,7 @@ import {
     Column,
     CreateDateColumn,
     ManyToMany,
-    JoinTable,
+    JoinTable, BeforeInsert, AfterUpdate,
 } from "typeorm";
 import {Issue} from "./Issue";
 import * as bcrypt from "bcrypt";
@@ -38,10 +38,15 @@ export class User {
     @Column()
     password: string;
 
-    @Column('varchar', {
-        length: 200,
+    @Column({
         nullable: true
     })
-    pass: string;
+    password_hash: string;
+
+    @BeforeInsert()
+    beforeInsert() {
+        this.password_hash = bcrypt.hashSync(this.password, 10);
+        console.log('before');
+    }
 
 }

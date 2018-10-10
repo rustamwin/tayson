@@ -9,7 +9,7 @@ import {User} from "../../entity/User";
 
 module.exports = async (user: User) => {
     try {
-        await getCustomRepository(UserRepository).update({id: user.id}, user);
+        await getCustomRepository(UserRepository).save(user);
         return {success: true};
     } catch (error) {
         console.log(error);

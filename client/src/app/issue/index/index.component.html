@@ -12,7 +12,7 @@
         <tbody>
         <tr *ngFor="let issue of issueList">
             <th><a [routerLink]="['/issue/view', issue.id]">{{issue.text}}</a></th>
-            <td>{{issue.done}}</td>
+            <td>{{issue.done ? 'Yes' : 'No'}}</td>
             <td>{{issue.project.name}}</td>
             <td>{{issue.createdAt | date:'medium'}}</td>
         </tr>

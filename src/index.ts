@@ -12,7 +12,7 @@ const methods = require('require-dir')('./methods', {recurse: true});
 createConnection().then(async connection => {
     const app = express();
     const server = await jayson.server({}, {
-        router: (method, params) => {
+        router: (method: any, params) => {
             if (_.hasIn(methods, method) && _.isFunction(_.get(methods, method))) {
                 return new jayson.Method(_.get(methods, method));
             }

@@ -38,15 +38,7 @@ export class User {
     @Column()
     password: string;
 
-    @Column({
-        nullable: true
-    })
-    password_hash: string;
-
-    @BeforeInsert()
-    beforeInsert() {
-        this.password_hash = bcrypt.hashSync(this.password, 10);
-        console.log('before');
-    }
+    @Column()
+    access_token: string;
 
 }

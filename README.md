@@ -10,13 +10,13 @@ put your own database connection configuration options in `ormconfig.json`
 
 ```sh
 // install npm packages
-~$ npm i
+$ npm i
 // install npm packages for client
-~$ cd client && npm i
+$ cd client && npm i
 // start server
-~$ npm start
+$ npm start
 // start client
-~$ npm start
+$ npm start
 ```
 
 Directory structure

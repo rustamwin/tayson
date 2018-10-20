@@ -15,7 +15,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
     }
 
 
-    setPassword(user: User) {
+    protected setPassword(user: User) {
         user.password = bcrypt.hashSync(user.password, 10);
         user.access_token = crypto.randomBytes(32).toString('hex');
     }

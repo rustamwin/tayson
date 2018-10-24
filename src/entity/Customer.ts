@@ -4,13 +4,13 @@ import {
     Column,
     CreateDateColumn,
     ManyToMany,
-    JoinTable, BeforeInsert, AfterUpdate,
+    JoinTable, BeforeInsert, AfterUpdate, OneToOne,
 } from "typeorm";
-import {Issue} from "./Issue";
+import {Order} from "./Order";
 import * as bcrypt from "bcrypt";
 
 @Entity()
-export class User {
+export class Customer {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -21,19 +21,14 @@ export class User {
     lastName: string;
 
     @Column()
-    email: string;
-
-    @Column('varchar', {
-        length: 200
-    })
-    job: string;
+    phone: string;
 
     @CreateDateColumn()
     createdAt: Date;
 
-    @ManyToMany(type => Issue, issue => issue.assigners)
+    @OneToOne(type => Order, order => order.user)
     @JoinTable()
-    issues: Issue[];
+    orders: Order[];
 
     @Column()
     password: string;

@@ -1,21 +1,21 @@
 import {EventSubscriber, EntitySubscriberInterface, InsertEvent} from "typeorm";
-import {User} from "../entity/User";
+import {Customer} from "../entity/Customer";
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto'
 
 @EventSubscriber()
-export class UserSubscriber implements EntitySubscriberInterface<User> {
+export class UserSubscriber implements EntitySubscriberInterface<Customer> {
 
     listenTo() {
-        return User;
+        return Customer;
     }
 
-    beforeInsert(event: InsertEvent<User>) {
+    beforeInsert(event: InsertEvent<Customer>) {
         this.setPassword(event.entity)
     }
 
 
-    protected setPassword(user: User) {
+    protected setPassword(user: Customer) {
         user.password = bcrypt.hashSync(user.password, 10);
         user.access_token = crypto.randomBytes(32).toString('hex');
     }

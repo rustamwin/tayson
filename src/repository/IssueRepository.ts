@@ -1,6 +1,6 @@
 import {EntityRepository, Repository} from "typeorm";
-import {Issue} from "../entity/Issue";
+import {Order} from "../entity/Order";
 
-@EntityRepository(Issue)
-export class IssueRepository extends Repository<Issue> {
+@EntityRepository(Order)
+export class IssueRepository extends Repository<Order> {
 }

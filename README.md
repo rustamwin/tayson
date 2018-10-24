@@ -31,3 +31,6 @@ src/                contains server application
     methods/        contains JSON-RPC methods
     repository      contains TypeORM repositories
 ```
+
+# Work
+

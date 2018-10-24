@@ -7,7 +7,7 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         data: {
-            heading: 'Issue tracker'
+            heading: 'Order tracker'
         }
     }
 ];

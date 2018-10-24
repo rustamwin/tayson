@@ -5,13 +5,13 @@ import {
     CreateDateColumn,
     ManyToMany,
     JoinTable,
-    UpdateDateColumn, ManyToOne
+    UpdateDateColumn, ManyToOne, OneToOne
 } from "typeorm";
-import {User} from "./User";
-import {Project} from "./Project";
+import {Customer} from "./Customer";
+import {Driver} from "./Driver";
 
 @Entity()
-export class Issue {
+export class Order {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -36,9 +36,9 @@ export class Issue {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => User, user => user.issues)
-    assigners: User[];
+    @OneToOne(type => Customer, user => user.issues)
+    customer: Customer[];
 
-    @ManyToOne(type => Project, project => project.issues)
-    project: Project;
+    @ManyToOne(type => Driver, project => project.issues)
+    project: Driver;
 }

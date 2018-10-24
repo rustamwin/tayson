@@ -1,6 +1,6 @@
 import {EntityRepository, Repository} from "typeorm";
-import {Project} from "../entity/Project";
+import {Driver} from "../entity/Driver";
 
-@EntityRepository(Project)
-export class ProjectRepository extends Repository<Project> {
+@EntityRepository(Driver)
+export class ProjectRepository extends Repository<Driver> {
 }

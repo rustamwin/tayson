@@ -1,9 +1,9 @@
 import {BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import {Issue} from "./Issue";
+import {Order} from "./Order";
 import * as _ from "lodash";
 
 @Entity()
-export class Project {
+export class Driver {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -28,9 +28,9 @@ export class Project {
     })
     status: string;
 
-    @OneToMany(type => Issue, issue => issue.project)
+    @OneToMany(type => Order, issue => issue.project)
     @JoinTable()
-    issues: Issue[];
+    issues: Order[];
 
     @CreateDateColumn()
     createdAt: Date;

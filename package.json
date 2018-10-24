@@ -57,6 +57,7 @@
     "pg": "^7.4.3",
     "reflect-metadata": "^0.1.12",
     "require-dir": "^1.0.0",
+    "socket-controllers": "0.0.3",
     "socket.io": "^2.1.1",
     "typeorm": "^0.2.7"
   }

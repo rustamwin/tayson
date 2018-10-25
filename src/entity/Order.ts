@@ -3,9 +3,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    ManyToMany,
-    JoinTable,
-    UpdateDateColumn, ManyToOne, OneToOne
+    ManyToOne, OneToOne
 } from "typeorm";
 import {Customer} from "./Customer";
 import {Driver} from "./Driver";
@@ -15,30 +13,29 @@ export class Order {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('varchar', {
-        length: 300
+    @Column('enum', {
+        enum: ['new', 'arrived', 'approved', 'process', 'completed'],
+        default: 'new'
     })
-    text: string;
+    status: string;
 
-    @Column('boolean', {
-        default: false
+    @Column('varchar', {
+        length: 32,
+        nullable: true
     })
-    done: boolean;
+    price: boolean;
 
     @Column({
         default: new Date()
     })
-    doneAt: Date;
+    completedAt: Date;
 
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
-
-    @OneToOne(type => Customer, user => user.issues)
+    @OneToOne(type => Customer, user => user.orders)
     customer: Customer[];
 
-    @ManyToOne(type => Driver, project => project.issues)
-    project: Driver;
+    @ManyToOne(type => Driver, driver => driver.orders)
+    driver: Driver;
 }

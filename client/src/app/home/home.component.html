@@ -7,3 +7,11 @@
 
     <p><a class="btn btn-lg btn-success" href="http://angular.io">Get started with Angular</a></p>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <app-user-create *ngIf="!user"></app-user-create>
+    </div>
+    <div class="col-md-6">
+        <app-driver-create *ngIf="!driver"></app-driver-create>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col col-md-12">
+        <h4>User Information</h4>
+        <p>
+            <a class="btn btn-info " [routerLink]="['/user/update', user.id]">Update</a>
+            <a class="btn btn-danger ml-1" href="javascript:;" (click)="delete()">Delete</a>
+        </p>
+        <table class="table table-striped table-bordered detail-view">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <td>
+                    {{user.firstName}}
+                </td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{user.lastName}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th>Job</th>
+                <td>{{user.job}}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{user.createdAt | date:'medium'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

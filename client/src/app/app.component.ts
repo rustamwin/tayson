@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RpcResponse, RpcService} from "./common/rpc.service";
 
 @Component({
     selector: 'app-root',
@@ -10,7 +9,7 @@ import {RpcResponse, RpcService} from "./common/rpc.service";
 export class AppComponent implements OnInit {
     title = 'Todo app';
 
-    constructor(private rpcService: RpcService) {
+    constructor() {
     }
 
     ngOnInit() {

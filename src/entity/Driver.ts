@@ -1,6 +1,5 @@
-import {BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Order} from "./Order";
-import * as _ from "lodash";
 
 @Entity()
 export class Driver {
@@ -10,38 +9,27 @@ export class Driver {
     @Column('varchar', {
         length: 100
     })
-    name: string;
+    firstName: string;
 
     @Column('varchar', {
         length: 100
     })
-    slug: string;
+    lastName: string;
 
     @Column('varchar', {
-        length: 300
+        length: 100
     })
-    info: string;
+    phone: string;
 
-    @Column('enum', {
-        enum: ['active', 'archived'],
-        default: 'active'
+    @Column('varchar', {
+        length: 100
     })
-    status: string;
+    carNumber: string;
 
-    @OneToMany(type => Order, issue => issue.project)
+    @OneToMany(type => Order, order => order.driver)
     @JoinTable()
-    issues: Order[];
+    orders: Order[];
 
     @CreateDateColumn()
     createdAt: Date;
-
-    @Column({
-        nullable: true
-    })
-    archivedAt: Date;
-
-    @BeforeInsert()
-    beforeInsert() {
-        this.slug = _.kebabCase(this.name);
-    }
 }

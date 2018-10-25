@@ -26,11 +26,13 @@ export class Customer {
     @CreateDateColumn()
     createdAt: Date;
 
-    @OneToOne(type => Order, order => order.user)
+    @OneToOne(type => Order, order => order.customer)
     @JoinTable()
     orders: Order[];
 
-    @Column()
+    @Column({
+        select: false
+    })
     password: string;
 
     @Column()

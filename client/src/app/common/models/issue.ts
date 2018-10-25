@@ -1,10 +1,10 @@
-import {Project} from "./project";
+import {Driver} from "./driver";
 import {User} from "./user";
 
 export class Issue {
     id?: string;
     text?: string;
-    project?: Project;
+    project?: Driver;
     assigners?: User[];
     done?: boolean;
     doneAt?: Date;

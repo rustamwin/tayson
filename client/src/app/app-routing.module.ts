@@ -13,10 +13,7 @@ const routes: Routes = [
             },
             {
                 path: 'home',
-                loadChildren: './home/home.module#HomeModule',
-                data: {
-                    activeClass: 'active'
-                }
+                loadChildren: './home/home.module#HomeModule'
             },
             {
                 path: 'user',
@@ -25,20 +22,6 @@ const routes: Routes = [
                     activeClass: 'active'
                 }
             },
-            {
-                path: 'project',
-                loadChildren: './project/project.module#ProjectModule',
-                data: {
-                    activeClass: 'active'
-                }
-            },
-            {
-                path: 'issue',
-                loadChildren: './issue/issue.module#IssueModule',
-                data: {
-                    activeClass: 'active'
-                }
-            }
         ]
     }
 ];

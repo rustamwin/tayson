@@ -2,25 +2,40 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../common/models/user";
 import {RpcResponse, RpcService} from "../../common/rpc.service";
 import {Router} from "@angular/router";
+import {SocketClient} from "../../common/decorators";
 
 @Component({
-    selector: 'app-create',
+    selector: 'app-user-create',
     templateUrl: './create.component.html',
     styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
     public user: User = {};
 
-    constructor(private rpcService: RpcService, private router: Router) {
+    constructor() {
     }
 
+    @SocketClient()
+    public io: any;
+
     ngOnInit() {
+        this.io.on('handled', msg => {
+            console.log(msg);
+        });
+        setTimeout(function (io) {
+            console.log(io);
+            io.on('order:saved', user => {
+                console.log(user);
+            });
+            io.on('order:created', user => {
+                console.log(user);
+            });
+        }, 0, this.io);
+
     }
 
     create() {
-        this.rpcService.call('user.create', this.user).subscribe((res: RpcResponse) => {
-            this.router.navigateByUrl(`/user/view/${res.result.id}`);
-        });
+        this.io.emit('order', this.user);
     }
 
 }

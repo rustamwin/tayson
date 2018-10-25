@@ -1,6 +1,6 @@
 import * as express from "express";
 import "reflect-metadata";
-import {json, urlencoded} from 'body-parser';
+import {json} from 'body-parser';
 import {createConnection} from "typeorm";
 import * as cors from 'cors';
 import * as io from 'socket.io';
@@ -8,10 +8,13 @@ import {useSocketServer} from "socket-controllers";
 import * as path from "path";
 
 createConnection().then(async connection => {
-    const app: express.Application = express();
+    const app = express();
     const server = require('http').Server(app);
-    app.use(cors());
-    app.use(json());
+    app.use(cors({
+        origin: 'http://localhost:4200',
+        allowedHeaders: 'Access-Control-Allow-Credentials: true'
+    }));
+    // app.use(json());
     app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
     app.get('/*', async (req, res, next) => {

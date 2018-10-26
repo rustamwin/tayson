@@ -4,7 +4,7 @@ import {
     Column,
     CreateDateColumn,
     ManyToMany,
-    JoinTable, BeforeInsert, AfterUpdate, OneToOne,
+    JoinTable, BeforeInsert, AfterUpdate, OneToOne, ManyToOne, OneToMany,
 } from "typeorm";
 import {Order} from "./Order";
 import * as bcrypt from "bcrypt";
@@ -26,14 +26,9 @@ export class Customer {
     @CreateDateColumn()
     createdAt: Date;
 
-    @OneToOne(type => Order, order => order.customer)
+    @OneToMany(type => Order, order => order.customer)
     @JoinTable()
     orders: Order[];
-
-    @Column({
-        select: false
-    })
-    password: string;
 
     @Column()
     access_token: string;

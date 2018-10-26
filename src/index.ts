@@ -12,7 +12,7 @@ createConnection().then(async connection => {
     const server = require('http').Server(app);
     app.use(cors({
         origin: 'http://localhost:4200',
-        allowedHeaders: 'Access-Control-Allow-Credentials: true'
+        credentials: true,
     }));
     // app.use(json());
     app.use(express.static(path.resolve(__dirname, '../client/dist')));

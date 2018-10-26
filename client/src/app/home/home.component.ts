@@ -25,15 +25,6 @@ export class HomeComponent implements OnInit {
             console.log(m);
             this.user = m;
         });
-        setTimeout(function (io) {
-            console.log(io);
-            io.on('order:saved', user => {
-                console.log(user);
-            });
-            io.on('order:created', user => {
-                console.log(user);
-            });
-        }, 0, this.io);
     }
 
 }

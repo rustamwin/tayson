@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../common/models/user";
-import {RpcResponse, RpcService} from "../../common/rpc.service";
-import {Router} from "@angular/router";
 import {SocketClient} from "../../common/decorators";
+import {Customer} from "../../common/models/customer";
 
 @Component({
     selector: 'app-user-create',
@@ -10,7 +8,7 @@ import {SocketClient} from "../../common/decorators";
     styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-    public user: User = {};
+    public user: Customer = {};
 
     constructor() {
     }
@@ -19,19 +17,6 @@ export class CreateComponent implements OnInit {
     public io: any;
 
     ngOnInit() {
-        this.io.on('handled', msg => {
-            console.log(msg);
-        });
-        setTimeout(function (io) {
-            console.log(io);
-            io.on('order:saved', user => {
-                console.log(user);
-            });
-            io.on('order:created', user => {
-                console.log(user);
-            });
-        }, 0, this.io);
-
     }
 
     create() {

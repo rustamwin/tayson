@@ -26,15 +26,15 @@ export class Order {
     price: boolean;
 
     @Column({
-        default: new Date()
+        nullable: true
     })
     completedAt: Date;
 
     @CreateDateColumn()
     createdAt: Date;
 
-    @OneToOne(type => Customer, user => user.orders)
-    customer: Customer[];
+    @ManyToOne(type => Customer, user => user.orders)
+    customer: Customer;
 
     @ManyToOne(type => Driver, driver => driver.orders)
     driver: Driver;

@@ -3,18 +3,18 @@
     <div class="col-md-12">
         <div class="form-group">
             <label class="control-label" for="user-name">Name</label>
-            <input type="text" id="user-name" class="form-control" [(ngModel)]="user.firstName">
+            <input type="text" autocomplete="false" id="user-name" class="form-control" [(ngModel)]="user.firstName">
         </div>
         <div class="form-group">
             <label class="control-label" for="user-lastname">Last Name</label>
             <input type="text" id="user-lastname" class="form-control" [(ngModel)]="user.lastName">
         </div>
         <div class="form-group">
-            <label class="control-label" for="user-email">Email</label>
-            <input type="text" id="user-email" class="form-control" [(ngModel)]="user.phone">
+            <label class="control-label" for="user-phone">Email</label>
+            <input type="text" id="user-phone" class="form-control" [(ngModel)]="user.phone">
         </div>
         <div class="form-group">
-            <button (click)="create()" [disabled]="!user" class="btn btn-success">Create</button>
+            <button (click)="create()" [disabled]="!user.firstName" class="btn btn-success">Create</button>
         </div>
     </div>
 </div>

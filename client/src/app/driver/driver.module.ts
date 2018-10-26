@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {UserRoutingModule} from './user-routing.module';
-import {UserComponent} from "./user.component";
+import {DriverRoutingModule} from './driver-routing.module';
+import {DriverComponent} from "./driver.component";
 import {CreateComponent} from './create/create.component';
 import {IndexComponent} from './index/index.component';
 import {FormsModule} from "@angular/forms";
@@ -12,10 +12,15 @@ import {ViewComponent} from "./view/view.component";
 @NgModule({
     imports: [
         CommonModule,
-        UserRoutingModule,
+        DriverRoutingModule,
         FormsModule
     ],
-    declarations: [UserComponent, IndexComponent, UpdateComponent, ViewComponent]
+    declarations: [
+        DriverComponent,
+        IndexComponent,
+        UpdateComponent,
+        ViewComponent
+    ]
 })
-export class UserModule {
+export class DriverModule {
 }

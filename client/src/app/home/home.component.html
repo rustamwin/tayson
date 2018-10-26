@@ -9,9 +9,9 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <app-user-create *ngIf="!user"></app-user-create>
+        <app-user-create *ngIf="!user || driver"></app-user-create>
     </div>
     <div class="col-md-6">
-        <app-driver-create *ngIf="!driver"></app-driver-create>
+        <app-driver-create *ngIf="!driver || user"></app-driver-create>
     </div>
 </div>

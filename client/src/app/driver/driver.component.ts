@@ -7,7 +7,7 @@ import {RpcResponse, RpcService} from "../common/rpc.service";
         <router-outlet></router-outlet>`,
     styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class DriverComponent implements OnInit {
     constructor(private rpcService: RpcService) {
     }
 

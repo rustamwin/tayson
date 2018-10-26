@@ -45,15 +45,17 @@ export class OrderController {
     @OnMessage("order")
     @EmitOnSuccess("order:saved")
     async order(@SocketIO() socket: any, @MessageBody() user: Customer) {
+        const customer = new Customer();
+        customer.firstName = user.firstName;
+        customer.lastName = user.lastName;
+        customer.phone = user.phone;
         let order = new Order();
-        user.orders = [order];
+        customer.orders = [order];
         try {
-            const message = await getCustomRepository(CustomerRepository).save(user);
-            console.log("received user:", message);
+            const message = await getCustomRepository(CustomerRepository).save(customer);
             socket.emit('order:created', message);
             return message;
         } catch (e) {
-            socket.emit('order:created', e);
             return e;
         }
     }

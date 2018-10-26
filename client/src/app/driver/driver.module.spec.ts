@@ -1,10 +1,10 @@
-import { UserModule } from './user.module';
+import { DriverModule } from './user.module';
 
 describe('UserModule', () => {
-  let userModule: UserModule;
+  let userModule: DriverModule;
 
   beforeEach(() => {
-    userModule = new UserModule();
+    userModule = new DriverModule();
   });
 
   it('should create an instance', () => {

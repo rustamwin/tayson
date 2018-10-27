@@ -18,14 +18,14 @@ import * as SocketIo from "socket.io";
 import {getCustomRepository} from "typeorm";
 import {CustomerRepository} from "../repository/CustomerRepository";
 import {Customer} from "../entity/Customer";
+import {OrderRepository} from "../repository/OrderRepository";
 
-@SocketController()
+@SocketController("/order")
 export class OrderController {
 
     @OnConnect()
     connect(@ConnectedSocket() socket: SocketIo.Server) {
         console.log("client connected");
-        console.log(socket.nsps);
     }
 
     @OnDisconnect()
@@ -42,20 +42,17 @@ export class OrderController {
         socket.emit("handled", message, 1);
     }
 
-    @OnMessage("order")
-    @EmitOnSuccess("order:saved")
-    async order(@SocketIO() socket: any, @MessageBody() user: Customer) {
-        const customer = new Customer();
-        customer.firstName = user.firstName;
-        customer.lastName = user.lastName;
-        customer.phone = user.phone;
-        let order = new Order();
-        customer.orders = [order];
+    @OnMessage("approve")
+    @EmitOnSuccess("approved")
+    async approve(@SocketIO() io: any, @MessageBody() order: Order) {
         try {
-            const message = await getCustomRepository(CustomerRepository).save(customer);
-            socket.emit('order:created', message);
-            return message;
+            order = await getCustomRepository(OrderRepository).findOne(order);
+            order.status = 'approved';
+            const order_changes = await getCustomRepository(CustomerRepository).save(order);
+            io.emit('status', order_changes);
+            return order_changes;
         } catch (e) {
+            console.log(e);
             return e;
         }
     }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Issue} from "./models/issue";
+import {Order} from "./models/order";
 import {User} from "./models/user";
 import {Driver} from "./models/driver";
 import {v4 as uuid} from "uuid";
@@ -41,5 +41,5 @@ export interface RpcResponse {
     jsonrpc: String;
     method: String;
     error?: Object;
-    result?: Issue & Driver & User & Issue[] & Driver[] & User[];
+    result?: Order & Driver & User & Order[] & Driver[] & User[];
 }

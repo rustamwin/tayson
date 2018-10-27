@@ -1,0 +1,24 @@
+<h3>Create new driver</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="control-label" for="driver-name">Name</label>
+            <input type="text" id="driver-name" class="form-control" [(ngModel)]="driver.firstName">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="driver-lastname">Last Name</label>
+            <input type="text" id="driver-lastname" class="form-control" [(ngModel)]="driver.lastName">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="driver-phone">Job</label>
+            <input type="tel" id="driver-phone" class="form-control" [(ngModel)]="driver.phone">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="driver-pass">Car Number</label>
+            <input type="text" id="driver-pass" class="form-control" [(ngModel)]="driver.carNumber">
+        </div>
+        <div class="form-group">
+            <button (click)="create()" [disabled]="!driver.firstName" class="btn btn-success">Create</button>
+        </div>
+    </div>
+</div>

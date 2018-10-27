@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {SocketClient} from "../../common/decorators";
+import {Component, Input, OnInit} from '@angular/core';
 import {Customer} from "../../common/models/customer";
 
 @Component({
@@ -13,14 +12,12 @@ export class CreateComponent implements OnInit {
     constructor() {
     }
 
-    @SocketClient()
-    public io: any;
-
     ngOnInit() {
+
     }
 
     create() {
-        this.io.emit('order', this.user);
+
     }
 
 }

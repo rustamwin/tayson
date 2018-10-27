@@ -3,11 +3,9 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    ManyToMany,
-    JoinTable, BeforeInsert, AfterUpdate, OneToOne, ManyToOne, OneToMany,
+    OneToMany, AfterLoad,
 } from "typeorm";
 import {Order} from "./Order";
-import * as bcrypt from "bcrypt";
 
 @Entity()
 export class Customer {
@@ -26,11 +24,19 @@ export class Customer {
     @CreateDateColumn()
     createdAt: Date;
 
-    @OneToMany(type => Order, order => order.customer)
-    @JoinTable()
+    @OneToMany(type => Order, order => order.customer, {
+        cascade: true
+    })
     orders: Order[];
 
     @Column()
-    access_token: string;
+    accessToken: string;
+
+    order: Order;
+
+    @AfterLoad()
+    afterLoad() {
+        this.order = this.orders.find(order => order.status != 'completed');
+    }
 
 }

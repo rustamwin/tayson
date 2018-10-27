@@ -1,5 +1,6 @@
-import {Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Order} from "./Order";
+import * as crypto from "crypto";
 
 @Entity()
 export class Driver {
@@ -26,10 +27,20 @@ export class Driver {
     })
     carNumber: string;
 
+    @Column('varchar', {
+        length: 100
+    })
+    accessToken: string;
+
     @OneToMany(type => Order, order => order.driver)
-    @JoinTable()
+    //@JoinTable()
     orders: Order[];
 
     @CreateDateColumn()
     createdAt: Date;
+
+    @BeforeInsert()
+    insert() {
+        this.accessToken = crypto.randomBytes(32).toString('hex')
+    }
 }

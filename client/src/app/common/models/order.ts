@@ -5,8 +5,8 @@ export class Order {
     id?: string;
     price?: number;
     driver?: Driver;
-    customer?: User[];
-    status?: string;
+    customer?: User;
+    status?: 'new'|'arrived'|'approved'|'process'|'completed';
     completedAt?: Date;
     createAt?: Date;
 }

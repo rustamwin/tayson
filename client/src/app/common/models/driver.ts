@@ -6,5 +6,6 @@ export interface Driver {
     lastName?: string;
     phone?: string;
     carNumber?: string;
-    order?: Order;
+    orders?: Order[];
+    activeOrder?: Order;
 }

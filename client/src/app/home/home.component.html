@@ -14,7 +14,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="customer-name">Name</label>
-                    <input type="text" autocomplete="false" id="customer-name" class="form-control" [(ngModel)]="customer.firstName">
+                    <input type="text" autocomplete="false" id="customer-name" class="form-control"
+                           [(ngModel)]="customer.firstName">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="customer-lastname">Last Name</label>
@@ -25,7 +26,9 @@
                     <input type="text" id="customer-phone" class="form-control" [(ngModel)]="customer.phone">
                 </div>
                 <div class="form-group">
-                    <button (click)="createUser()" [disabled]="!customer.firstName" class="btn btn-success">Become a customer</button>
+                    <button (click)="createUser()" [disabled]="!customer.firstName" class="btn btn-success">Become a
+                        customer
+                    </button>
                 </div>
             </div>
         </div>
@@ -43,7 +46,7 @@
                     <input type="text" id="driver-lastname" class="form-control" [(ngModel)]="driver.lastName">
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="driver-phone">Job</label>
+                    <label class="control-label" for="driver-phone">Phone</label>
                     <input type="tel" id="driver-phone" class="form-control" [(ngModel)]="driver.phone">
                 </div>
                 <div class="form-group">
@@ -51,7 +54,9 @@
                     <input type="text" id="driver-pass" class="form-control" [(ngModel)]="driver.carNumber">
                 </div>
                 <div class="form-group">
-                    <button (click)="createDriver()" [disabled]="!driver.firstName" class="btn btn-success">Become a driver</button>
+                    <button (click)="createDriver()" [disabled]="!driver.firstName" class="btn btn-success">Become a
+                        driver
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,15 +69,72 @@
         <tr>
             <th>Status</th>
             <th>Driver</th>
+            <th>Car number</th>
             <th>Price</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <th>{{user.order.status}}</th>
-            <td>{{user.order.driver.firstName}}</td>
-            <td>{{user.order.price}}</td>
+            <td>{{user.order.driver ? user.order.driver.firstName : ''}}</td>
+            <td>{{user.order.driver ? user.order.driver.carNumber : ''}}</td>
+            <td>{{user.order.price || ''}}</td>
         </tr>
         </tbody>
+    </table>
+</div>
+<div *ngIf="user && !user.activeOrder && orders" class="table-responsive">
+    <table class="table table-condensed table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Status</th>
+            <th>User</th>
+            <th>User Phone</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders">
+            <th>{{order.status}}</th>
+            <td>{{order.customer ? order.customer.firstName : ''}}</td>
+            <td>{{order.customer.phone || ''}}</td>
+            <td>
+                <button class="btn btn-success" (click)="approve(order)">Approve</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="user && user.activeOrder" class="table-responsive">
+    <table class="table table-condensed table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Status</th>
+            <th>User</th>
+            <th>Phone</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>{{user.activeOrder.status}}</th>
+            <td>{{user.activeOrder.customer ? user.activeOrder.customer.firstName : ''}}</td>
+            <td>{{user.activeOrder.customer.phone || ''}}</td>
+            <td>{{user.activeOrder.price || ''}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+Price
+            </td>
+            <td>
+                <input *ngIf="user.activeOrder.status == 'process'" type="number" [(ngModel)]="user.activeOrder.price">
+            </td>
+            <td>
+                <button [disabled]="!user.activeOrder!.price" (click)="orderStatus(user.activeOrder)">{{getNextStatus(user.activeOrder)}}</button>
+            </td>
+        </tr>
+        </tfoot>
     </table>
 </div>

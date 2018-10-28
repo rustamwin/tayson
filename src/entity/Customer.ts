@@ -34,9 +34,4 @@ export class Customer {
 
     order: Order;
 
-    @AfterLoad()
-    afterLoad() {
-        this.order = this.orders.find(order => order.status != 'completed');
-    }
-
 }

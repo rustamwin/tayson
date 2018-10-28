@@ -36,15 +36,29 @@ export class UserController {
     }
 
     @OnMessage("user:create")
-    // @EmitOnSuccess("user:created")
+    @EmitOnSuccess("user:created")
     async userCreate(@SocketIO() io: any, @ConnectedSocket() socket, @MessageBody() user: Customer) {
         try {
             console.log(user);
             const order = await getCustomRepository(OrderRepository).save(new Order);
             user.orders = [order];
             const customer = await getCustomRepository(CustomerRepository).save(user);
-            socket.emit('user:created', customer);
-            socket.emit('order:created', order);
+            socket.broadcast.emit('order:created', await getCustomRepository(OrderRepository).findOne(order.id));
+            return customer;
+        } catch (e) {
+            console.log(e);
+            return e;
+        }
+    }
+
+    @OnMessage("user:order")
+    //@EmitOnSuccess("user:created")
+    async userOrder(@SocketIO() io: any, @ConnectedSocket() socket, @MessageBody() user: Customer) {
+        try {
+            const customer = await getCustomRepository(CustomerRepository).findOne(user.id, {
+                relations: ['orders']
+            });
+            socket.emit('user:order', customer.orders.find(order => order.status != 'completed'));
             return customer;
         } catch (e) {
             console.log(e);
@@ -66,13 +80,31 @@ export class UserController {
     }
 
     @OnMessage("driver:order")
-    //@EmitOnSuccess("user:created")
-    async driverOrder(@SocketQueryParam('token') token: any, @ConnectedSocket() socket, @MessageBody() user: Driver) {
+    @EmitOnSuccess("driver:order")
+    async driverOrder(@ConnectedSocket() socket, @MessageBody() user: Driver) {
         try {
             const driver = await getCustomRepository(DriverRepository).find(user);
-            const orders = await getCustomRepository(OrderRepository).find({status: 'new'});
+            const orders = await getCustomRepository(OrderRepository).find();
             socket.emit('driver:orders', orders);
-            return driver;
+            return orders.find((order: Order) => {
+                return order.status != 'completed';
+            });
+        } catch (e) {
+            console.log(e);
+            return e;
+        }
+    }
+
+    @OnMessage("order:status")
+    @EmitOnSuccess("driver:order")
+    async orderStatus(@ConnectedSocket() socket, @MessageBody() order: any) {
+        try {
+            order.status = getCustomRepository(OrderRepository).getNextStatus(order);
+            const newOrder = await getCustomRepository(OrderRepository).save(order);
+            console.log(newOrder);
+            // const orders = await getCustomRepository(OrderRepository).find({relations: ['customer']});
+            socket.broadcast.emit('order:status', newOrder);
+            return newOrder;
         } catch (e) {
             console.log(e);
             return e;

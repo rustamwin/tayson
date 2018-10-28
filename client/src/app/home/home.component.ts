@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
     @CurrentUser()
     user: User & Driver;
 
-    driver: Driver;
+    public driver: Driver = {};
 
-    customer: User;
+    public customer: User = {};
 
     orders: Order[];
 
@@ -29,6 +29,13 @@ export class HomeComponent implements OnInit {
     protected io: any;
 
     ngOnInit() {
+        console.log('inited');
+        setTimeout(() => {
+            this.initSocket();
+        }, 0);
+    }
+
+    initSocket() {
         if (!this.user) {
             this.io.on('user:created', user => {
                 this.user = user;
@@ -43,15 +50,33 @@ export class HomeComponent implements OnInit {
             this.title = this.user.firstName;
 
             if (this.user.carNumber) {
-                this.io.on('driver:orders', list => {
-                    this.orders = list;
-                });
                 this.io.emit('driver:order', this.user);
-            } else {
-                this.io.on('user:order', order => {
-                    this.user.order = order
+                this.io.on('driver:order', order => {
+                    this.user.activeOrder = order;
+                    this.orders = undefined;
+                    console.log(this.user.activeOrder);
                 });
+                this.io.on('driver:orders', list => {
+                    if (!this.user.activeOrder)
+                        this.orders = list;
+                    console.log(this.orders);
+                });
+                this.io.on('order:created', order => {
+                    this.orders.push(order);
+                    console.log(order);
+                });
+            } else {
                 this.io.emit('user:order', this.user);
+                this.io.on('user:order', (order: Order) => {
+                    this.user.order = order;
+                    console.log(order);
+                });
+                this.io.on('order:status', (order: Order) => {
+                    if (order.customer && order.customer.id == this.user.id) {
+                        this.user.order = order;
+                        console.log(order);
+                    }
+                });
             }
         }
     }
@@ -62,5 +87,27 @@ export class HomeComponent implements OnInit {
 
     createDriver() {
         this.io.emit('driver:create', this.driver);
+    }
+
+    approve(order) {
+        order.driver = this.user;
+        this.io.emit('order:status', order, 'approve');
+    }
+
+    orderStatus(order) {
+        this.io.emit('order:status', order, 'approve');
+    }
+
+    getNextStatus(order: Order) {
+        if (order.status == 'new') {
+            return 'approved';
+        } else if (order.status == 'approved') {
+            return 'arrived';
+        } else if (order.status == 'arrived') {
+            return 'process';
+        } else if (order.status == 'process') {
+            return "completed";
+        }
+        return order.status;
     }
 }

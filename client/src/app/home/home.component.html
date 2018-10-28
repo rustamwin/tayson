@@ -6,6 +6,7 @@
     <p class="lead">You have successfully created your Express powered Angular application.</p>
 
     <p><a class="btn btn-lg btn-success" href="http://angular.io">Get started with Angular</a></p>
+    <p *ngIf="user && !user.carNumber && !user.order"><button class="btn btn-lg btn-success" (click)="orderNew()">Create new Order</button></p>
 </div>
 <div *ngIf="!user" class="row">
     <div class="col-md-6">
@@ -83,7 +84,7 @@
         </tbody>
     </table>
 </div>
-<div *ngIf="user && !user.activeOrder && orders" class="table-responsive">
+<div *ngIf="user && orders && orders.length > 0" class="table-responsive">
     <table class="table table-condensed table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -126,13 +127,13 @@
         <tfoot>
         <tr>
             <td colspan="2">
-Price
+                Price
             </td>
             <td>
                 <input *ngIf="user.activeOrder.status == 'process'" type="number" [(ngModel)]="user.activeOrder.price">
             </td>
             <td>
-                <button [disabled]="!user.activeOrder!.price" (click)="orderStatus(user.activeOrder)">{{getNextStatus(user.activeOrder)}}</button>
+                <button [disabled]="user.activeOrder.status == 'completed' && !user.activeOrder!.price" (click)="orderStatus(user.activeOrder)">{{getNextStatus(user.activeOrder)}}</button>
             </td>
         </tr>
         </tfoot>

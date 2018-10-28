@@ -52,8 +52,9 @@ export class HomeComponent implements OnInit {
             if (this.user.carNumber) {
                 this.io.emit('driver:order', this.user);
                 this.io.on('driver:order', order => {
-                    this.user.activeOrder = order;
-                    this.orders = undefined;
+                    if (order && order.id)
+                        this.user.activeOrder = order;
+                    //this.orders = undefined;
                     console.log(this.user.activeOrder);
                 });
                 this.io.on('driver:orders', list => {
@@ -90,8 +91,13 @@ export class HomeComponent implements OnInit {
     }
 
     approve(order) {
+        this.orders = [];
         order.driver = this.user;
         this.io.emit('order:status', order, 'approve');
+    }
+
+    orderNew() {
+        this.io.emit('order:new', this.user);
     }
 
     orderStatus(order) {

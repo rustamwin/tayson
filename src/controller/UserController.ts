@@ -21,6 +21,7 @@ import {Customer} from "../entity/Customer";
 import {OrderRepository} from "../repository/OrderRepository";
 import {Driver} from "../entity/Driver";
 import {DriverRepository} from "../repository/DriverRepository";
+import {User} from "../../client/src/app/common/models/user";
 
 @SocketController("/user")
 export class UserController {
@@ -49,6 +50,14 @@ export class UserController {
             console.log(e);
             return e;
         }
+    }
+
+    @OnMessage('order:new')
+    async orderNew(@ConnectedSocket() socket: any, @MessageBody() user: User) {
+        const order = new Order();
+        order.customer = await getCustomRepository(CustomerRepository).findOne(user.id);
+        const result = getCustomRepository(OrderRepository).save(order);
+        socket.broadcast.emit('order:created', result)
     }
 
     @OnMessage("user:order")
@@ -83,12 +92,12 @@ export class UserController {
     @EmitOnSuccess("driver:order")
     async driverOrder(@ConnectedSocket() socket, @MessageBody() user: Driver) {
         try {
-            const driver = await getCustomRepository(DriverRepository).find(user);
-            const orders = await getCustomRepository(OrderRepository).find();
-            socket.emit('driver:orders', orders);
-            return orders.find((order: Order) => {
-                return order.status != 'completed';
+            const driver = await getCustomRepository(DriverRepository).findOne(user.id, {
+                relations: ['orders']
             });
+            const orders = await getCustomRepository(OrderRepository).find({where: {status: 'new'}});
+            socket.emit('driver:orders', orders);
+            return driver.orders.find(order => order.status != 'completed');
         } catch (e) {
             console.log(e);
             return e;

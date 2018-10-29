@@ -125,7 +125,7 @@
         </tr>
         </tbody>
         <tfoot>
-        <tr>
+        <tr *ngIf="user.activeOrder.status != 'completed'">
             <td colspan="2">
                 Price
             </td>

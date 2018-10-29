@@ -3,6 +3,7 @@ import {CurrentUser, SocketClient} from "../common/decorators";
 import {User} from "../common/models/user";
 import {Driver} from "../common/models/driver";
 import {Order} from "../common/models/order";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-home',
@@ -11,7 +12,7 @@ import {Order} from "../common/models/order";
 })
 export class HomeComponent implements OnInit {
 
-    constructor() {
+    constructor(protected route: ActivatedRoute, protected router: Router) {
     }
 
     @CurrentUser()
@@ -37,13 +38,15 @@ export class HomeComponent implements OnInit {
 
     initSocket() {
         if (!this.user) {
-            this.io.on('user:created', user => {
+            this.io.on('user:created', async user => {
                 this.user = user;
                 localStorage.setItem('__identity', JSON.stringify(user));
+                await this.router.navigate(['/home'])
             });
-            this.io.on('driver:created', user => {
+            this.io.on('driver:created', async user => {
                 this.driver = user;
                 localStorage.setItem('__identity', JSON.stringify(user));
+                await this.router.navigate(['/home'])
             });
         }
         if (this.user) {
@@ -55,12 +58,10 @@ export class HomeComponent implements OnInit {
                     if (order && order.id)
                         this.user.activeOrder = order;
                     //this.orders = undefined;
-                    console.log(this.user.activeOrder);
                 });
                 this.io.on('driver:orders', list => {
                     if (!this.user.activeOrder)
                         this.orders = list;
-                    console.log(this.orders);
                 });
                 this.io.on('order:created', order => {
                     this.orders.push(order);

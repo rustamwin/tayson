@@ -40,7 +40,6 @@ export class UserController {
     @EmitOnSuccess("user:created")
     async userCreate(@SocketIO() io: any, @ConnectedSocket() socket, @MessageBody() user: Customer) {
         try {
-            console.log(user);
             const order = await getCustomRepository(OrderRepository).save(new Order);
             user.orders = [order];
             const customer = await getCustomRepository(CustomerRepository).save(user);
@@ -53,11 +52,18 @@ export class UserController {
     }
 
     @OnMessage('order:new')
+    @EmitOnSuccess("user:order")
     async orderNew(@ConnectedSocket() socket: any, @MessageBody() user: User) {
-        const order = new Order();
-        order.customer = await getCustomRepository(CustomerRepository).findOne(user.id);
-        const result = getCustomRepository(OrderRepository).save(order);
-        socket.broadcast.emit('order:created', result)
+        try {
+            const order = new Order();
+            order.customer = await getCustomRepository(CustomerRepository).findOne(user.id);
+            const result = await getCustomRepository(OrderRepository).save(order);
+            const newOrder = await getCustomRepository(OrderRepository).findOne(result.id);
+            socket.broadcast.emit('order:created', newOrder);
+            return newOrder;
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     @OnMessage("user:order")
@@ -97,7 +103,7 @@ export class UserController {
             });
             const orders = await getCustomRepository(OrderRepository).find({where: {status: 'new'}});
             socket.emit('driver:orders', orders);
-            return driver.orders.find(order => order.status != 'completed');
+            return driver.orders.find((order: Order) => order.status != 'completed');
         } catch (e) {
             console.log(e);
             return e;
@@ -109,6 +115,9 @@ export class UserController {
     async orderStatus(@ConnectedSocket() socket, @MessageBody() order: any) {
         try {
             order.status = getCustomRepository(OrderRepository).getNextStatus(order);
+            if (order.status == 'completed') {
+                order.completedAt = new Date();
+            }
             const newOrder = await getCustomRepository(OrderRepository).save(order);
             console.log(newOrder);
             // const orders = await getCustomRepository(OrderRepository).find({relations: ['customer']});

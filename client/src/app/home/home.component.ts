@@ -38,15 +38,15 @@ export class HomeComponent implements OnInit {
 
     initSocket() {
         if (!this.user) {
-            this.io.on('user:created', async user => {
+            this.io.on('user:created', user => {
                 this.user = user;
                 localStorage.setItem('__identity', JSON.stringify(user));
-                await this.router.navigate(['/home'])
+                window.location.reload()
             });
-            this.io.on('driver:created', async user => {
+            this.io.on('driver:created', user => {
                 this.driver = user;
                 localStorage.setItem('__identity', JSON.stringify(user));
-                await this.router.navigate(['/home'])
+                window.location.reload()
             });
         }
         if (this.user) {

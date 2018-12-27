@@ -8,7 +8,7 @@ import * as path from "path";
 import * as _ from "lodash";
 
 const jayson = require('jayson/promise');
-const methods = require('require-dir')('./methods', {recurse: true});
+const methods = require('require-dir')('./method', {recurse: true});
 
 createConnection().then(async connection => {
     const app = express();

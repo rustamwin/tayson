@@ -50,7 +50,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "jayson": "^3.3.4",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",

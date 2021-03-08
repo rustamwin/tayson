@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.9",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "chalk": "^4.1.0",
     "class-validator": "^0.13.1",
     "commander": "^7.1.0",

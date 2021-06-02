@@ -58,6 +58,6 @@
     "reflect-metadata": "^0.1.13",
     "require-dir": "^1.2.0",
     "socket.io": "^2.4.0",
-    "typeorm": "^0.2.31"
+    "typeorm": "^0.2.33"
   }
 }

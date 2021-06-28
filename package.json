@@ -45,7 +45,7 @@
     "bcrypt": "^5.0.0",
     "chalk": "^4.1.0",
     "class-validator": "^0.13.1",
-    "commander": "^7.1.0",
+    "commander": "^8.0.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
